@@ -27,6 +27,7 @@
     },
     "autoload": {
         "files": [
+            "php/found.php",
             "php/main.php"
         ]
     }

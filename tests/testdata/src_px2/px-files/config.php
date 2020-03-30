@@ -113,6 +113,14 @@ return call_user_func( function(){
 		// Apache互換のSSIの記述を解決する
 		'picklesFramework2\processors\ssi\ssi::exec' ,
 
+		// px2-report
+		// NGワード検出
+		'tomk79\pickles2\px2report\found::ngwords('.json_encode([
+			'nogood',
+			'NoGood',
+			'oo',
+		]).')' ,
+
 		// output_encoding, output_eol_coding の設定に従ってエンコード変換する。
 		'picklesFramework2\processors\encodingconverter\encodingconverter::exec' ,
 	];
@@ -146,6 +154,11 @@ return call_user_func( function(){
 
 	// funcs: Before output
 	$conf->funcs->before_output = [
+		// px2-report
+		// NGワード検出
+		'tomk79\pickles2\px2report\found::ngwords('.json_encode([
+			'func',
+		]).')' ,
 	];
 
 
