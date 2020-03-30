@@ -29,6 +29,23 @@ class mainTest extends PHPUnit_Framework_TestCase{
 			'php', __DIR__.'/testdata/src_px2/.px_execute.php', '/?PX=publish.run'
 		] );
 		// var_dump($output);
+		$this->assertTrue( $this->common_error( $output ) );
+		clearstatcache();
+
+		// alert_log.csv を確認する
+		$path_csv = __DIR__.'/testdata/src_px2/px-files/_sys/ram/publish/alert_log.csv';
+		$this->assertTrue( is_file(__DIR__.'/testdata/src_px2/px-files/_sys/ram/publish/alert_log.csv') );
+		$fs = new \tomk79\filesystem();
+		$csv = $fs->read_csv($path_csv);
+		// var_dump($csv);
+		$this->assertTrue( is_array($csv) );
+		$this->assertEquals( count($csv), 10 );
+		$this->assertEquals( $csv[1][1], '/index.html' );
+		$this->assertEquals( $csv[1][2], 'NG Word "nogood" was found.' );
+		$this->assertEquals( $csv[2][1], '/index.html' );
+		$this->assertEquals( $csv[2][2], 'NG Word "nogood" was found. (hinted by "NoGood")' );
+		$this->assertEquals( $csv[4][1], '/common/scripts/contents.js' );
+		$this->assertEquals( $csv[4][2], 'NG Word "func" was found.' );
 
 		// 後始末
 		$output = $this->passthru( [
