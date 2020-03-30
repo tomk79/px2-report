@@ -62,7 +62,7 @@ $conf->funcs->before_output = [
 
 ## 更新履歴 - Change log
 
-### tomk79/px2-report v0.1.0 (リリース日未定)
+### tomk79/px2-report v0.1.0 (2020年3月31日)
 
 - Initial Release
 
