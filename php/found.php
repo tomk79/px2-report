@@ -17,8 +17,16 @@ class found{
 			$src = $px->bowl()->get( $key );
 
 			foreach($json as $ngword){
-				if( strpos($src, $ngword) !== false ){
-					$px->error('NG Word "'.$ngword.'" was found.');
+				$pattern = '/('.preg_quote($ngword, '/').')/i'; // case insensitive
+				if( preg_match($pattern, $src, $matched) ){
+					$ngword_hit = $matched[0];
+					$msg = '';
+					if( $ngword !== $ngword_hit ){
+						$msg = 'NG Word "'.$matched[0].'" was found. (hinted by "'.$ngword.'")';
+					}else{
+						$msg = 'NG Word "'.$ngword.'" was found.';
+					}
+					$px->error( $msg );
 				}
 			}
 		}
